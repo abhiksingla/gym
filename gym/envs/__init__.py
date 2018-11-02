@@ -291,6 +291,7 @@ register(
     max_episode_steps=1000,
 )
 
+
 # Robotics
 # ----------------------------------------
 
@@ -303,6 +304,14 @@ for reward_type in ['sparse', 'dense']:
     kwargs = {
         'reward_type': reward_type,
     }
+
+    # Monoloeg
+    register(
+        id='MonoLegReach{}-v0'.format(suffix),
+        entry_point='gym.envs.leg_learning:FetchReachEnv',
+        kwargs=kwargs,
+        max_episode_steps=50,
+    )
 
     # Fetch
     register(
