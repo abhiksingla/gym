@@ -6,23 +6,23 @@ import gym
 from gym import error, spaces
 from gym.utils import seeding
 
-try:
-    import mujoco_py
-except ImportError as e:
-    raise error.DependencyNotInstalled("{}. (HINT: you need to install mujoco_py, and also perform the setup instructions here: https://github.com/openai/mujoco-py/.)".format(e))
+# try:
+#     import mujoco_py
+# except ImportError as e:
+#     raise error.DependencyNotInstalled("{}. (HINT: you need to install mujoco_py, and also perform the setup instructions here: https://github.com/openai/mujoco-py/.)".format(e))
 
 
 class RobotEnv(gym.GoalEnv):
     def __init__(self, model_path, initial_qpos, n_actions, n_substeps):
-        if model_path.startswith('/'):
-            fullpath = model_path
-        else:
-            fullpath = os.path.join(os.path.dirname(__file__), 'assets', model_path)
-        if not os.path.exists(fullpath):
-            raise IOError('File {} does not exist'.format(fullpath))
+        # if model_path.startswith('/'):
+            # fullpath = model_path
+        # else:
+            # fullpath = os.path.join(os.path.dirname(__file__), 'assets', model_path)
+        # if not os.path.exists(fullpath):
+            # raise IOError('File {} does not exist'.format(fullpath))
 
-        model = mujoco_py.load_model_from_path(fullpath)
-        self.sim = mujoco_py.MjSim(model, nsubsteps=n_substeps)
+        # model = mujoco_py.load_model_from_path(fullpath)
+        self.sim = # use this for sending signals    #mujoco_py.MjSim(model, nsubsteps=n_substeps) 
         self.viewer = None
 
         self.metadata = {
@@ -45,7 +45,7 @@ class RobotEnv(gym.GoalEnv):
 
     @property
     def dt(self):
-        return self.sim.model.opt.timestep * self.sim.nsubsteps
+        return self.sim.model.opt.timestep * self.sim.nsubsteps  ### set time step
 
     # Env methods
     # ----------------------------
